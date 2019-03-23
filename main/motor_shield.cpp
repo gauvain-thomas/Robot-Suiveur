@@ -9,7 +9,7 @@ static const int speedMotorLeft = 0;
 static const int speedMotorRight = 0;
 
 
-static void setup() {
+void init_motor_shield() {
   pinMode(speedMotorRight, OUTPUT);
   pinMode(speedMotorLeft, OUTPUT);
 }
