@@ -28,6 +28,35 @@ void init_ultrasonic() {
 
 char check_direction() {
   char direction;
+  long gauche = 0;
+  long droite = 0;
+  long compteur = 0;
+
+  Serial.println("Checking direction...")
+
+  while(compteur < 5000) {
+    digitalWrite(pinTrig1, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(pinTrig1, LOW);
+
+    digitalWrite(pinTrig2, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(pinTrig2, LOW);
+
+    digitalWrite(pinTrig3, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(pinTrig3, LOW);
+
+    if (digitalRead(pinEcho1) == 1) {
+    gauche++;
+  }
+    if (digitalRead(pinEcho2) == 1) {
+    droite++;
+  }
+    compteur++;
+    delayMicroseconds(10);
+
+  }
 
   return direction;
 }
