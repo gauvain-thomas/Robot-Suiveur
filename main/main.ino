@@ -4,15 +4,16 @@
 
 #include "motor_shield.h"
 #include "ultrasonic.h"
-#include "obstacle_detection.h"
+#include "obstacle_avoidance.h"
 
 char direction;
 
 void setup() {
   Serial.begin(9600); //Set Serial port communication to 9600 bauds
 
+  // Initializing modules
   init_motor_shield();
-  // init_obstacle_detection();
+  //init_obstacle_avoidance();
   init_ultrasonic();
 
   Serial.println("Ready to go !");

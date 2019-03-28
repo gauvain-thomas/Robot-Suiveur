@@ -32,7 +32,7 @@ char check_direction() {
   long droite = 0;
   long compteur = 0;
 
-  Serial.println("Checking direction...")
+  Serial.println("Checking direction...");
 
   while(compteur < 5000) {
     digitalWrite(pinTrig1, HIGH);
