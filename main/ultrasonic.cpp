@@ -5,14 +5,14 @@
 #include "Arduino.h"
 #include "ultrasonic.h"
 
-static const int pinEcho1 = 0;
-static const int pinTrig1 = 0;
+static const int pinEcho1 = 6;
+static const int pinTrig1 = 7;
 
-static const int pinEcho2 = 0;
-static const int pinTrig2 = 0;
+static const int pinEcho2 = 2;
+static const int pinTrig2 = 3;
 
-static const int pinEcho3 = 0;
-static const int pinTrig3 = 0;
+// static const int pinEcho3 = 0;
+// static const int pinTrig3 = 0;
 
 
 void init_ultrasonic() {
@@ -22,8 +22,8 @@ void init_ultrasonic() {
   pinMode(pinEcho2, INPUT);
   pinMode(pinTrig2, OUTPUT);
 
-  pinMode(pinEcho3, INPUT);
-  pinMode(pinTrig3, OUTPUT);
+  // pinMode(pinEcho3, INPUT);
+  // pinMode(pinTrig3, OUTPUT);
 }
 
 char check_direction() {
@@ -43,9 +43,9 @@ char check_direction() {
     delayMicroseconds(10);
     digitalWrite(pinTrig2, LOW);
 
-    digitalWrite(pinTrig3, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(pinTrig3, LOW);
+    // digitalWrite(pinTrig3, HIGH);
+    // delayMicroseconds(10);
+    // digitalWrite(pinTrig3, LOW);
 
     if (digitalRead(pinEcho1) == 1) {
     gauche++;
@@ -57,6 +57,17 @@ char check_direction() {
     delayMicroseconds(10);
 
   }
+
+  if(gauche > droite) {
+    Serial.println("Gauche");
+    direction = 'l';
+  }
+  else {
+    Serial.println("Droite");
+    direction = 'r';
+  }
+  Serial.println(gauche);
+  Serial.println(droite);
 
   return direction;
 }

@@ -5,13 +5,22 @@ Controls robot's motors with an Arduino motor shield
 #include "Arduino.h"
 #include "motor_shield.h"
 
-static const int speedMotorLeft = 0;
-static const int speedMotorRight = 0;
+static const int speedMotorLeft = 8;
+static const int speedMotorRight = 13;
 
+static const int in1 = 9;
+static const int in2 = 10;
+static const int in3 = 11;
+static const int in4 = 12;
 
 void init_motor_shield() {
   pinMode(speedMotorRight, OUTPUT);
   pinMode(speedMotorLeft, OUTPUT);
+
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
 }
 
 void forward(int speed=100) {
@@ -21,8 +30,12 @@ void forward(int speed=100) {
   analogWrite(speedMotorLeft, speed);
   analogWrite(speedMotorRight, speed);
 
-  // digitalWrite();
-  // digitalWrite();
+  // turn on motor A
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
 
   Serial.println("Forward !");
 }
@@ -34,8 +47,12 @@ void back(int speed=100) {
   analogWrite(speedMotorLeft, speed);
   analogWrite(speedMotorRight, speed);
 
-  // digitalWrite();
-  // digitalWrite();
+    // turn on motor A
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
 
   Serial.println("Back !");
 }
@@ -47,8 +64,12 @@ void right(int speed=100) {
   analogWrite(speedMotorLeft, speed);
   analogWrite(speedMotorRight, speed);
 
-  // digitalWrite();
-  // digitalWrite();
+  // turn on motor A
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
 
   Serial.println("Left !");
 }
@@ -60,8 +81,11 @@ void left(int speed=100) {
   analogWrite(speedMotorLeft, speed);
   analogWrite(speedMotorRight, speed);
 
-  // digitalWrite();
-  // digitalWrite();
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
 
   Serial.println("Right !");
 }

@@ -30,13 +30,20 @@ void loop() {
       back();
       break;
     case 'r':
-      right();
+      while(direction == 'r') {
+       right();
+       direction = check_direction();
+       delay(200); 
+      }
       break;
     case 'l':
-      left();
+      while(direction == 'l') {
+        left();
+        direction = check_direction();
+        delay(200);
+      }
     default:
       stop();
   }
-
-  delay(1000);
+  delay(500);
 }
