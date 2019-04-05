@@ -12,7 +12,7 @@ void setup() {
   Serial.begin(9600); //Set Serial port communication to 9600 bauds
 
   // Initializing modules
-  init_motor_shield();
+  //init_motor_shield();
   //init_obstacle_avoidance();
   init_ultrasonic();
 
