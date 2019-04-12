@@ -1,5 +1,6 @@
 /**
-
+  * Ultrasonic module
+  * Used to detect person postion
 */
 
 #include "Arduino.h"
@@ -31,10 +32,15 @@ void init_ultrasonic() {
 }
 
 char check_direction() {
+  const float pi = 3,1415926535;
   char direction;
-  long gauche = 0;
-  long droite = 0;
-  long compteur = 0;
+  float distance;
+  float angle;
+  int sensor_dist = 100 ; // Distance between sensors (mm)
+  float sound_speed = 0,343; // Speed of sound (mm/µs)
+  // long gauche = 0;
+  // long droite = 0;
+  // long compteur = 0;
 
   Serial.println("Checking direction...");
   /*
@@ -77,21 +83,41 @@ char check_direction() {
 while(digitalRead(12) == 0) {
   Serial.println(digitalRead(12));
 }
+
 Serial.println(digitalRead(12));
 
-  digitalWrite(pinTrig1, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(pinTrig1, LOW);
-  time1 = pulseIn(pinEcho1, HIGH);
+digitalWrite(pinTrig1, HIGH);
+delayMicroseconds(10);
+digitalWrite(pinTrig1, LOW);
+time1 = pulseIn(pinEcho1, HIGH);
 
-  digitalWrite(pinTrig2, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(pinTrig2, LOW);
-  time2 = pulseIn(pinEcho2, HIGH);
+digitalWrite(pinTrig2, HIGH);
+delayMicroseconds(10);
+digitalWrite(pinTrig2, LOW);
+time2 = pulseIn(pinEcho2, HIGH);
 
-  Serial.println(time1 * 0.343);
-  Serial.println(time2 * 0.343);
+d1 = time1 * sound_speed;
+d2 = time2 * sound_speed;
 
-  delay(10);
-  return direction;
+distance = sqrt((sq(d1) - sq(d2)) / 4 );
+angle = pi - acos((sq(d1) - sq(d2)) / (sensor_dist * sqrt(2*sq(d1) + 2*sq(d2) - sq(sensor_dist))));
+
+Serial.println(distance);
+Serial.println(angle);
+
+if(distance < 800) {
+  direction = 's';
+}
+else if (angle > 0,1) {
+  direction = 'r';
+}
+else if(angle < 0,1) {
+  direction = 'l';
+}
+else {
+  direction = 'f'
+}
+
+delay(10);
+return direction;
 }

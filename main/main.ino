@@ -14,6 +14,7 @@ void setup() {
   // Initializing modules
   //init_motor_shield();
   //init_obstacle_avoidance();
+  //init_elevating_table();
   init_ultrasonic();
 
   Serial.println("Ready to go !");
@@ -26,24 +27,31 @@ void loop() {
     case 'f':
       forward();
       break;
+
     case 'b':
       back();
       break;
+
     case 'r':
       while(direction == 'r') {
        right();
        direction = check_direction();
-       delay(200); 
+       delay(200);
       }
       break;
+
     case 'l':
       while(direction == 'l') {
         left();
         direction = check_direction();
         delay(200);
       }
+      break;
     default:
       stop();
   }
+
+  update_table();
+  
   delay(500);
 }
