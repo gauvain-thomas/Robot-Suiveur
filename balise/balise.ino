@@ -1,5 +1,5 @@
-const int echo = 0;
-const int trig = 0;
+const int echo = 8;
+const int trig = 9;
 
 void setup() {
   pinMode(echo, INPUT);
@@ -8,7 +8,8 @@ void setup() {
 
 void loop() {
   digitalWrite(trig, HIGH);
-  digitalRead(trig);
-
+  delayMicroseconds(10);
+  digitalWrite(trig,LOW);
+  digitalRead(echo);
   delayMicroseconds(10);
 }
